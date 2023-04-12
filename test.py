@@ -39,14 +39,14 @@ model.eval()
 encoded_pixels = []
 
 
-def post_process(probability, threshold, min_size):
-    mask = cv2.threshold(probability, threshold, 1, cv2.THRESH_BINARY)[1]
+def post_process(probability_, threshold_, min_size_):
+    mask = cv2.threshold(probability_, threshold_, 1, cv2.THRESH_BINARY)[1]
     num_component, component = cv2.connectedComponents(mask.astype(np.uint8))
     predictions = np.zeros((1024, 1024), np.float32)
     num = 0
     for c in range(1, num_component):
         p = (component == c)
-        if p.sum() > min_size:
+        if p.sum() > min_size_:
             predictions[p] = 1
             num += 1
     return predictions, num
@@ -80,7 +80,7 @@ for i, batch in enumerate(tqdm(test_loader)):
     for probability in preds:
         if probability.shape != (1024, 1024):
             probability = cv2.resize(probability, dsize=(1024, 1024), interpolation=cv2.INTER_LINEAR)
-        predict, num_pred = post_process(probability, threshold=threshold, min_size=min_size)
+        predict, num_pred = post_process(probability, threshold_=threshold, min_size_=min_size)
         if num_pred == 0:
             encoded_pixels.append('-1')
         else:
