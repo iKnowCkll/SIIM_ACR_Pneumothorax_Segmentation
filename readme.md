@@ -9,7 +9,7 @@
 
 # Github 
 
-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
+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
 
 #####
 在这个任务中，主要是一个简单的二分类分割任务，输入的图像是png格式，mask是通过rel编码转换过来的灰度图像。
