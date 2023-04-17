@@ -31,7 +31,6 @@ sr_ = Style.RESET_ALL
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 if not os.path.exists(cfg['save_path']):
     os.makedirs(cfg['save_path'])
-
 # =========================data_path=================================
 data_path = '/home/chenk/model_train/kaggle/SIIM_ACR_Pneumothorax_Segmentation/train/siimpng/train_png'
 df_path = '/home/chenk/model_train/kaggle/SIIM_ACR_Pneumothorax_Segmentation/' \
@@ -129,7 +128,7 @@ if __name__ == '__main__':
     params = {}
     for key, value in cfg.items():
         params[key] = value
-    for fold in range(int(cfg['n_fold'])):
+    for fold in range(4, int(cfg['n_fold'])):
         print(f'#' * 15)
         print(f'### Fold: {fold}')
         print(f'#' * 15)
